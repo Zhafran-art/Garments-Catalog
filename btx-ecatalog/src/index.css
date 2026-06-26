@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-ink font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand-600/20 text-brand-900;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-semibold
+           transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500
+           focus-visible:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-gradient text-white shadow-card hover:shadow-card-hover hover:-translate-y-0.5;
+  }
+
+  .btn-outline {
+    @apply btn border border-brand-200 bg-white text-brand-700 hover:border-brand-400
+           hover:bg-brand-50 hover:-translate-y-0.5;
+  }
+
+  .btn-ghost {
+    @apply btn text-ink hover:bg-brand-50;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-1.5
+           text-xs font-semibold uppercase tracking-[0.18em] text-brand-700;
+  }
+
+  .section {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .card {
+    @apply rounded-2xl border border-gray-100 bg-white shadow-card transition-all duration-500;
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar for a polished feel */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-600 via-brand-500 to-brand-800 bg-clip-text text-transparent;
+  }
+
+  .grid-bg {
+    background-image: linear-gradient(rgba(116, 55, 163, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(116, 55, 163, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
