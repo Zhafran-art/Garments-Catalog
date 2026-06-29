@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight, Layers, Tag, Boxes } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Layers, Tag, Boxes, Maximize2 } from 'lucide-react'
 import type { ProductVariant } from '../data/products'
 import PlaceholderImage from './PlaceholderImage'
+import ProductGalleryModal from './ProductGalleryModal'
 
 interface ProductCarouselProps {
   items: ProductVariant[]
@@ -28,6 +29,7 @@ export default function ProductCarousel({
 }: ProductCarouselProps) {
   const [[index, dir], setState] = useState<[number, number]>([0, 0])
   const [paused, setPaused] = useState(false)
+  const [galleryProduct, setGalleryProduct] = useState<ProductVariant | null>(null)
 
   const paginate = useCallback(
     (next: number) => {
@@ -50,6 +52,10 @@ export default function ProductCarousel({
 
   const active = items[index]
   const Icon = icon
+  // When a product has a real photo gallery, the pop-out shows one tile per
+  // photo — so the hint should reflect that count, not the short tag list.
+  const activeCount = active.gallery?.length ?? active.variations.length
+  const activeNoun = active.gallery ? 'designs' : 'variations'
 
   return (
     <div
@@ -59,8 +65,13 @@ export default function ProductCarousel({
     >
       <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-card">
         <div className="grid lg:grid-cols-2">
-          {/* Image side */}
-          <div className="relative aspect-[4/3] overflow-hidden bg-brand-50 lg:aspect-auto lg:min-h-[460px]">
+          {/* Image side — click to open the variation gallery */}
+          <button
+            type="button"
+            onClick={() => setGalleryProduct(active)}
+            aria-label={`View all ${active.name} variations`}
+            className="group relative aspect-[4/3] overflow-hidden bg-brand-50 text-left lg:aspect-auto lg:min-h-[460px]"
+          >
             <AnimatePresence custom={dir} mode="popLayout">
               <motion.div
                 key={index}
@@ -72,18 +83,25 @@ export default function ProductCarousel({
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute inset-0"
               >
-                <PlaceholderImage
-                  src={active.image}
-                  alt={active.name}
-                  icon={Icon}
-                  label={active.name}
-                />
+                <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105">
+                  <PlaceholderImage
+                    src={active.image}
+                    alt={active.name}
+                    icon={Icon}
+                    label={active.name}
+                  />
+                </div>
               </motion.div>
             </AnimatePresence>
             <span className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-brand-700 shadow-sm backdrop-blur">
               {index + 1} / {items.length}
             </span>
-          </div>
+            {/* Hover hint */}
+            <span className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 bg-gradient-to-t from-brand-950/75 via-brand-950/30 to-transparent p-5 text-sm font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <Maximize2 className="h-4 w-4" />
+              Click to view all {activeCount} {activeNoun}
+            </span>
+          </button>
 
           {/* Content side */}
           <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
@@ -164,7 +182,7 @@ export default function ProductCarousel({
       </div>
 
       {/* Thumbnail rail */}
-      <div className="mt-5 flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="scrollbar-thin mt-5 flex gap-3 overflow-x-auto pb-2">
         {items.map((item, i) => (
           <button
             key={item.name}
@@ -188,6 +206,12 @@ export default function ProductCarousel({
           </button>
         ))}
       </div>
+
+      <ProductGalleryModal
+        product={galleryProduct}
+        icon={icon}
+        onClose={() => setGalleryProduct(null)}
+      />
     </div>
   )
 }

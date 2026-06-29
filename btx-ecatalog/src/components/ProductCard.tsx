@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Layers, Tag, Boxes } from 'lucide-react'
+import { Layers, Tag, Boxes, Maximize2 } from 'lucide-react'
 import type { ProductVariant } from '../data/products'
 import PlaceholderImage from './PlaceholderImage'
+import ProductGalleryModal from './ProductGalleryModal'
 
 interface ProductCardProps {
   product: ProductVariant
@@ -13,14 +15,24 @@ interface ProductCardProps {
  * No price / cart — this is an e-catalog, not a store.
  */
 export default function ProductCard({ product, icon = 'Image' }: ProductCardProps) {
+  const [galleryOpen, setGalleryOpen] = useState(false)
+  // Reflect the real photo-gallery count in the hover hint when present.
+  const galleryCount = product.gallery?.length ?? product.variations.length
+  const galleryNoun = product.gallery ? 'designs' : 'variations'
+
   return (
     <motion.article
       whileHover={{ y: -8 }}
       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
       className="card group flex h-full flex-col overflow-hidden hover:border-brand-200 hover:shadow-card-hover"
     >
-      {/* Image with zoom-on-hover */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      {/* Image with zoom-on-hover — click to open the variation gallery */}
+      <button
+        type="button"
+        onClick={() => setGalleryOpen(true)}
+        aria-label={`View all ${product.name} variations`}
+        className="relative aspect-[4/3] w-full overflow-hidden text-left"
+      >
         <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-110">
           <PlaceholderImage
             src={product.image}
@@ -32,7 +44,18 @@ export default function ProductCard({ product, icon = 'Image' }: ProductCardProp
         <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-brand-700 shadow-sm backdrop-blur">
           {product.material}
         </span>
-      </div>
+        {/* Hover hint */}
+        <span className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 bg-gradient-to-t from-brand-950/75 via-brand-950/25 to-transparent p-4 text-xs font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <Maximize2 className="h-4 w-4" />
+          View {galleryCount} {galleryNoun}
+        </span>
+      </button>
+
+      <ProductGalleryModal
+        product={galleryOpen ? product : null}
+        icon={icon}
+        onClose={() => setGalleryOpen(false)}
+      />
 
       <div className="flex flex-1 flex-col p-6">
         <h3 className="font-display text-lg font-bold text-ink">{product.name}</h3>

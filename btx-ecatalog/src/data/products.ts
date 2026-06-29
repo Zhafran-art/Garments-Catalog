@@ -19,6 +19,14 @@ export type CategorySlug =
   | 'components'
   | 'packaging'
 
+/** A single image tile shown inside the pop-out gallery grid. */
+export interface GalleryItem {
+  /** Caption shown under the tile, e.g. "Button 1" */
+  label: string
+  /** Path to a real image, e.g. "/images/buttons/plastic/plastic-01.png" */
+  image: string
+}
+
 export interface ProductVariant {
   name: string
   description: string
@@ -27,6 +35,12 @@ export interface ProductVariant {
   applications: string[]
   /** Optional path to a real image, e.g. "/images/zippers/metal.jpg" */
   image?: string
+  /**
+   * Optional set of real product photos. When present, the pop-out gallery
+   * shows one tile per item (with its image) instead of the generic
+   * variation placeholders.
+   */
+  gallery?: GalleryItem[]
 }
 
 export interface Category {
@@ -67,6 +81,10 @@ export const categories: Category[] = [
         material: 'Polyester resin / ABS',
         variations: ['2-hole', '4-hole', 'Matte / Glossy', 'Pearlized', 'Custom color'],
         applications: ['Shirts', 'Blouses', 'Dresses', 'Fashion apparel'],
+        gallery: Array.from({ length: 48 }, (_, i) => ({
+          label: `Button ${i + 1}`,
+          image: `/images/buttons/plastic/plastic-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Metal Button',
@@ -75,6 +93,10 @@ export const categories: Category[] = [
         material: 'Zinc alloy / brass',
         variations: ['Jeans button', 'Tack button', 'Antique brass', 'Nickel-free'],
         applications: ['Denim', 'Jackets', 'Workwear', 'Outerwear'],
+        gallery: Array.from({ length: 1 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/metal-button/metal-button-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Snap Button',
@@ -99,6 +121,10 @@ export const categories: Category[] = [
         material: 'Zinc alloy / plastic',
         variations: ['Metal shank', 'Plastic shank', 'Dome', 'Engraved'],
         applications: ['Coats', 'Blazers', 'Knitwear', 'Outerwear'],
+        gallery: Array.from({ length: 50 }, (_, i) => ({
+          label: `Shank ${i + 1}`,
+          image: `/images/shank-button/shank-button-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Shell / Pearl Button',
@@ -187,6 +213,10 @@ export const categories: Category[] = [
         material: 'Zinc alloy / POM / nylon',
         variations: ['Side-release', 'Pin buckle', 'Roller', 'Cam lock'],
         applications: ['Belts', 'Bags', 'Outerwear', 'Sportswear'],
+        gallery: Array.from({ length: 18 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/buckle/buckle-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Cord Lock / Stopper',
@@ -195,6 +225,22 @@ export const categories: Category[] = [
         material: 'POM / nylon / metal',
         variations: ['Single-hole', 'Double-hole', 'Spring', 'Custom shape'],
         applications: ['Hoodies', 'Jackets', 'Bags', 'Outdoor gear'],
+        gallery: Array.from({ length: 9 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/cord-lock-stopper/cord-lock-stopper-${String(i + 1).padStart(2, '0')}.png`,
+        })),
+      },
+      {
+        name: 'Zipper Puller',
+        description:
+          'Pull tabs and cord pullers that give zippers an easy grip and a finished, branded look.',
+        material: 'Metal / cord / rubber',
+        variations: ['Cord puller', 'Metal tab', 'Rubber tip', 'Custom shape'],
+        applications: ['Jackets', 'Bags', 'Sportswear', 'Footwear'],
+        gallery: Array.from({ length: 6 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/zipper-puller/zipper-puller-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'D-Ring',
@@ -203,6 +249,10 @@ export const categories: Category[] = [
         material: 'Zinc alloy / steel',
         variations: ['Welded', 'Cast', 'Plated', 'Multiple widths'],
         applications: ['Bags', 'Straps', 'Overalls', 'Accessories'],
+        gallery: Array.from({ length: 11 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/d-ring/d-ring-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'O-Ring',
@@ -211,6 +261,10 @@ export const categories: Category[] = [
         material: 'Zinc alloy / steel',
         variations: ['Welded', 'Seamless', 'Plated', 'Multiple gauges'],
         applications: ['Bags', 'Straps', 'Fashion', 'Accessories'],
+        gallery: Array.from({ length: 6 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/o-ring/o-ring-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Slider',
@@ -219,6 +273,10 @@ export const categories: Category[] = [
         material: 'Metal / engineered plastic',
         variations: ['Tri-glide', 'Ladder lock', 'Cam', 'Convex'],
         applications: ['Straps', 'Bags', 'Sportswear', 'Workwear'],
+        gallery: Array.from({ length: 11 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/slider/slider-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Eyelet / Grommet',
@@ -267,6 +325,22 @@ export const categories: Category[] = [
         material: 'Zinc alloy / steel',
         variations: ['Swivel hook', 'Snap hook', 'Lobster clasp', 'Dog hook'],
         applications: ['Bags', 'Straps', 'Lanyards', 'Accessories'],
+        gallery: Array.from({ length: 6 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/metal-hook/metal-hook-${String(i + 1).padStart(2, '0')}.png`,
+        })),
+      },
+      {
+        name: 'Metal Fitting',
+        description:
+          'Assorted metal fittings and hardware accents — rings, plates, and connectors that finish straps, bags, and apparel with a quality feel.',
+        material: 'Zinc alloy / brass / steel',
+        variations: ['Rings', 'Plates', 'Connectors', 'Custom finish'],
+        applications: ['Bags', 'Straps', 'Apparel', 'Accessories'],
+        gallery: Array.from({ length: 7 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/metal-fitting/metal-fitting-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Chain',
@@ -275,6 +349,10 @@ export const categories: Category[] = [
         material: 'Iron / zinc alloy / brass',
         variations: ['Curb', 'Ball', 'Flat link', 'Plated'],
         applications: ['Bags', 'Fashion', 'Footwear', 'Accessories'],
+        gallery: Array.from({ length: 3 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/chain/chain-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
     ],
   },
@@ -531,6 +609,10 @@ export const categories: Category[] = [
         material: 'Polyester / damask / satin weave',
         variations: ['Damask', 'Satin', 'Taffeta', 'Folded', 'Straight cut'],
         applications: ['Neck labels', 'Brand tags', 'Care patches'],
+        gallery: Array.from({ length: 4 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/woven-label/woven-label-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Printed Label',
@@ -539,6 +621,10 @@ export const categories: Category[] = [
         material: 'Satin / cotton / nylon tape',
         variations: ['Satin', 'Cotton', 'Nylon', 'Continuous'],
         applications: ['Care info', 'Size tags', 'Brand labels'],
+        gallery: Array.from({ length: 8 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/printed-label/printed-label-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Heat Transfer Label',
@@ -595,6 +681,10 @@ export const categories: Category[] = [
         material: 'Genuine / PU leather',
         variations: ['Debossed', 'Embossed', 'Laser-etched', 'Stitched'],
         applications: ['Denim', 'Bags', 'Caps', 'Outerwear'],
+        gallery: Array.from({ length: 16 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/leather-patch/leather-patch-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Rubber Patch',
@@ -603,6 +693,10 @@ export const categories: Category[] = [
         material: 'PVC / rubber',
         variations: ['2D', '3D', 'Soft-touch', 'Glow / reflective'],
         applications: ['Outerwear', 'Bags', 'Caps', 'Footwear'],
+        gallery: Array.from({ length: 10 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/rubber-patch/rubber-patch-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Silicone Patch',
@@ -619,6 +713,10 @@ export const categories: Category[] = [
         material: 'Polyester / cotton thread',
         variations: ['Iron-on', 'Sew-on', 'Velcro-back', 'Merrowed edge'],
         applications: ['Caps', 'Jackets', 'Uniforms', 'Fashion'],
+        gallery: Array.from({ length: 37 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/embroidery-patch/embroidery-patch-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
       {
         name: 'Woven Patch',
@@ -635,6 +733,10 @@ export const categories: Category[] = [
         material: 'Zinc alloy / brass / stainless',
         variations: ['Engraved', 'Embossed', 'Enamel-fill', 'Plated'],
         applications: ['Bags', 'Footwear', 'Outerwear', 'Accessories'],
+        gallery: Array.from({ length: 34 }, (_, i) => ({
+          label: `Plate ${i + 1}`,
+          image: `/images/metal-plate/metal-plate-${String(i + 1).padStart(2, '0')}.png`,
+        })),
       },
     ],
   },

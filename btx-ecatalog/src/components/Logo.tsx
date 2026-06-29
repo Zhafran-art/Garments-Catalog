@@ -9,8 +9,12 @@ interface LogoProps {
 export default function Logo({ variant = 'dark', className = '' }: LogoProps) {
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
-      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gradient font-display text-lg font-extrabold text-white shadow-card">
-        B
+      <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-white p-1 shadow-card ring-1 ring-brand-100">
+        <img
+          src="/images/bentex-emblem.png"
+          alt={COMPANY.name}
+          className="h-full w-full object-contain"
+        />
       </span>
       <div className="leading-tight">
         <span
