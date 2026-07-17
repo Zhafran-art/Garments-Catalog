@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Layers, Tag, Boxes, Maximize2 } from 'lucide-react'
 import type { ProductVariant } from '../data/products'
+import { importGalleryModal, prefetch } from '../lib/prefetch'
 import PlaceholderImage from './PlaceholderImage'
-import ProductGalleryModal from './ProductGalleryModal'
+import LazyProductGalleryModal from './LazyProductGalleryModal'
 
 interface ProductCardProps {
   product: ProductVariant
@@ -16,20 +17,30 @@ interface ProductCardProps {
  */
 export default function ProductCard({ product, icon = 'Image' }: ProductCardProps) {
   const [galleryOpen, setGalleryOpen] = useState(false)
+  // Keep the modal mounted after the first open so its close animation still
+  // plays, while deferring its chunk until the shopper actually opens it.
+  const [galleryMounted, setGalleryMounted] = useState(false)
   // Reflect the real photo-gallery count in the hover hint when present.
   const galleryCount = product.gallery?.length ?? product.variations.length
   const galleryNoun = product.gallery ? 'designs' : 'variations'
+
+  const openGallery = () => {
+    setGalleryMounted(true)
+    setGalleryOpen(true)
+  }
 
   return (
     <motion.article
       whileHover={{ y: -8 }}
       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+      onMouseEnter={() => prefetch(importGalleryModal)}
       className="card group flex h-full flex-col overflow-hidden hover:border-brand-200 hover:shadow-card-hover"
     >
       {/* Image with zoom-on-hover — click to open the variation gallery */}
       <button
         type="button"
-        onClick={() => setGalleryOpen(true)}
+        onClick={openGallery}
+        onFocus={() => prefetch(importGalleryModal)}
         aria-label={`View all ${product.name} variations`}
         className="relative aspect-[4/3] w-full overflow-hidden text-left"
       >
@@ -51,11 +62,13 @@ export default function ProductCard({ product, icon = 'Image' }: ProductCardProp
         </span>
       </button>
 
-      <ProductGalleryModal
-        product={galleryOpen ? product : null}
-        icon={icon}
-        onClose={() => setGalleryOpen(false)}
-      />
+      {galleryMounted && (
+        <LazyProductGalleryModal
+          product={galleryOpen ? product : null}
+          icon={icon}
+          onClose={() => setGalleryOpen(false)}
+        />
+      )}
 
       <div className="flex flex-1 flex-col p-6">
         <h3 className="font-display text-lg font-bold text-ink">{product.name}</h3>

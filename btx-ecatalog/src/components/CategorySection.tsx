@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { categories } from '../data/products'
+import { importCategoryPage, prefetch } from '../lib/prefetch'
 import { getIcon } from './icons'
 import PlaceholderImage from './PlaceholderImage'
 
@@ -25,6 +26,8 @@ export default function CategorySection() {
           >
             <Link
               to={`/${cat.slug}`}
+              onMouseEnter={() => prefetch(importCategoryPage)}
+              onFocus={() => prefetch(importCategoryPage)}
               className="card group relative flex h-full flex-col overflow-hidden hover:border-brand-200 hover:shadow-card-hover"
             >
               <div className="relative aspect-[16/10] overflow-hidden">

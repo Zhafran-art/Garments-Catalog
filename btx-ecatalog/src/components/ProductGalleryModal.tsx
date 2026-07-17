@@ -5,7 +5,7 @@ import { X, Tag } from 'lucide-react'
 import type { ProductVariant } from '../data/products'
 import PlaceholderImage from './PlaceholderImage'
 
-interface ProductGalleryModalProps {
+export interface ProductGalleryModalProps {
   /** When non-null the modal is open and shows this product's variations */
   product: ProductVariant | null
   icon?: string

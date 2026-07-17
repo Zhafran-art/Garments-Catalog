@@ -11,7 +11,7 @@ export default function Logo({ variant = 'dark', className = '' }: LogoProps) {
     <div className={`flex items-center gap-2.5 ${className}`}>
       <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-white p-1 shadow-card ring-1 ring-brand-100">
         <img
-          src="/images/bentex-emblem.png"
+          src="/images/bentex-emblem.webp"
           alt={COMPANY.name}
           className="h-full w-full object-contain"
         />

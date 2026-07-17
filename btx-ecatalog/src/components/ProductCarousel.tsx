@@ -2,8 +2,9 @@ import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Layers, Tag, Boxes, Maximize2 } from 'lucide-react'
 import type { ProductVariant } from '../data/products'
+import { importGalleryModal, prefetch } from '../lib/prefetch'
 import PlaceholderImage from './PlaceholderImage'
-import ProductGalleryModal from './ProductGalleryModal'
+import LazyProductGalleryModal from './LazyProductGalleryModal'
 
 interface ProductCarouselProps {
   items: ProductVariant[]
@@ -30,6 +31,14 @@ export default function ProductCarousel({
   const [[index, dir], setState] = useState<[number, number]>([0, 0])
   const [paused, setPaused] = useState(false)
   const [galleryProduct, setGalleryProduct] = useState<ProductVariant | null>(null)
+  // Keep the modal mounted after the first open so its close animation plays,
+  // while deferring its chunk until the shopper actually opens it.
+  const [galleryMounted, setGalleryMounted] = useState(false)
+
+  const openGallery = (product: ProductVariant) => {
+    setGalleryMounted(true)
+    setGalleryProduct(product)
+  }
 
   const paginate = useCallback(
     (next: number) => {
@@ -60,7 +69,10 @@ export default function ProductCarousel({
   return (
     <div
       className="relative"
-      onMouseEnter={() => setPaused(true)}
+      onMouseEnter={() => {
+        setPaused(true)
+        prefetch(importGalleryModal)
+      }}
       onMouseLeave={() => setPaused(false)}
     >
       <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-card">
@@ -68,7 +80,7 @@ export default function ProductCarousel({
           {/* Image side — click to open the variation gallery */}
           <button
             type="button"
-            onClick={() => setGalleryProduct(active)}
+            onClick={() => openGallery(active)}
             aria-label={`View all ${active.name} variations`}
             className="group relative aspect-[4/3] overflow-hidden bg-brand-50 text-left lg:aspect-auto lg:min-h-[460px]"
           >
@@ -207,11 +219,13 @@ export default function ProductCarousel({
         ))}
       </div>
 
-      <ProductGalleryModal
-        product={galleryProduct}
-        icon={icon}
-        onClose={() => setGalleryProduct(null)}
-      />
+      {galleryMounted && (
+        <LazyProductGalleryModal
+          product={galleryProduct}
+          icon={icon}
+          onClose={() => setGalleryProduct(null)}
+        />
+      )}
     </div>
   )
 }

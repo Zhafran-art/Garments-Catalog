@@ -85,7 +85,7 @@ btx-ecatalog/
 | ----------------- | -------------------------------------------- |
 | `/`               | Homepage — hero, intro, featured categories  |
 | `/buttons`        | Buttons & Fasteners + carousel               |
-| `/zippers`        | Zippers & Hardware + carousel                |
+| `/zippers`        | Zippers, Sliders & Hardware + carousel                |
 | `/elastic`        | Elastic & Tape + carousel                    |
 | `/lace`           | Lace & Trims + carousel                      |
 | `/labels`         | Labels & Branding + carousel                 |

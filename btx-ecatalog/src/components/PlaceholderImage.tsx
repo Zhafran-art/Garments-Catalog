@@ -25,17 +25,32 @@ export default function PlaceholderImage({
   label,
 }: PlaceholderImageProps) {
   const [failed, setFailed] = useState(false)
+  const [loaded, setLoaded] = useState(false)
   const Icon = getIcon(icon)
 
   if (src && !failed) {
+    // Progressive loading: the photo is decoded off the main thread and only
+    // fetched near the viewport, then fades in over a soft brand-tinted panel
+    // so it eases into place instead of popping in once decoded.
     return (
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        onError={() => setFailed(true)}
-        className={`h-full w-full object-cover ${className}`}
-      />
+      <div className="relative h-full w-full overflow-hidden bg-brand-50/60">
+        <img
+          // A cached image can finish before React attaches onLoad, so reconcile
+          // the loaded state from the element itself when the ref is set.
+          ref={(node) => {
+            if (node?.complete && node.naturalWidth > 0) setLoaded(true)
+          }}
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+          className={`h-full w-full object-cover transition-opacity duration-500 ease-out ${
+            loaded ? 'opacity-100' : 'opacity-0'
+          } ${className}`}
+        />
+      </div>
     )
   }
 

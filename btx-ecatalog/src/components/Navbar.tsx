@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import Logo from './Logo'
 import { categories } from '../data/products'
+import { importCategoryPage, prefetch } from '../lib/prefetch'
 import { getIcon } from './icons'
 
 const simpleLinks = [
@@ -84,6 +85,7 @@ export default function Navbar() {
           <li className="relative" ref={dropdownRef}>
             <button
               onClick={() => setProductsOpen((v) => !v)}
+              onMouseEnter={() => prefetch(importCategoryPage)}
               className={`relative flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
                 onProductsPage || productsOpen
                   ? 'text-brand-700'
