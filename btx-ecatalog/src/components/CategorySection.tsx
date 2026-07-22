@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { categories } from '../data/products'
+import { categories, getCategoryCover } from '../data/products'
 import { importCategoryPage, prefetch } from '../lib/prefetch'
 import { getIcon } from './icons'
 import PlaceholderImage from './PlaceholderImage'
@@ -32,7 +32,12 @@ export default function CategorySection() {
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-110">
-                  <PlaceholderImage alt={cat.name} icon={cat.icon} label={cat.name} />
+                  <PlaceholderImage
+                    src={getCategoryCover(cat)}
+                    alt={cat.name}
+                    icon={cat.icon}
+                    label={cat.name}
+                  />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-950/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 <span className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-brand-600 shadow-card backdrop-blur transition-transform duration-500 group-hover:scale-110">

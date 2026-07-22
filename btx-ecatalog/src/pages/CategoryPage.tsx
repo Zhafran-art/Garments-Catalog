@@ -4,7 +4,7 @@ import HeroSection from '../components/HeroSection'
 import ProductCarousel from '../components/ProductCarousel'
 import ProductCard from '../components/ProductCard'
 import Reveal from '../components/Reveal'
-import { categories, getCategory } from '../data/products'
+import { categories, getCategory, getCategoryCover } from '../data/products'
 
 /**
  * Single reusable page that renders any product category by URL slug.
@@ -26,6 +26,7 @@ export default function CategoryPage() {
         title={category.heroTitle}
         subtitle={category.heroSubtitle}
         primaryCta={{ label: 'Request a Quote', to: '/contact' }}
+        image={getCategoryCover(category)}
         icon={category.icon}
       />
 

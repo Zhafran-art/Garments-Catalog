@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Layers, Tag, Boxes, Maximize2 } from 'lucide-react'
-import type { ProductVariant } from '../data/products'
+import { getProductCover, type ProductVariant } from '../data/products'
 import { importGalleryModal, prefetch } from '../lib/prefetch'
 import PlaceholderImage from './PlaceholderImage'
 import LazyProductGalleryModal from './LazyProductGalleryModal'
@@ -46,7 +46,7 @@ export default function ProductCard({ product, icon = 'Image' }: ProductCardProp
       >
         <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-110">
           <PlaceholderImage
-            src={product.image}
+            src={getProductCover(product)}
             alt={product.name}
             icon={icon}
             label={product.name}

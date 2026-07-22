@@ -93,7 +93,7 @@ export const categories: Category[] = [
         material: 'Zinc alloy / brass',
         variations: ['Jeans button', 'Tack button', 'Antique brass', 'Nickel-free'],
         applications: ['Denim', 'Jackets', 'Workwear', 'Outerwear'],
-        gallery: Array.from({ length: 2 }, (_, i) => ({
+        gallery: Array.from({ length: 3 }, (_, i) => ({
           label: `Design ${i + 1}`,
           image: `/images/metal-button/metal-button-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -121,7 +121,7 @@ export const categories: Category[] = [
         material: 'Zinc alloy / plastic',
         variations: ['Metal shank', 'Plastic shank', 'Dome', 'Engraved'],
         applications: ['Coats', 'Blazers', 'Knitwear', 'Outerwear'],
-        gallery: Array.from({ length: 50 }, (_, i) => ({
+        gallery: Array.from({ length: 86 }, (_, i) => ({
           label: `Shank ${i + 1}`,
           image: `/images/shank-button/shank-button-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -171,12 +171,16 @@ export const categories: Category[] = [
         })),
       },
       {
-        name: 'Toggle',
+        name: 'Eyelet / Grommet',
         description:
-          'Bar-and-loop toggle fasteners in wood, horn, and plastic that add a functional, casual-luxe detail to outerwear.',
-        material: 'Wood / horn / plastic',
-        variations: ['Wooden', 'Horn-look', 'Plastic', 'Leather loop'],
-        applications: ['Duffle coats', 'Knitwear', 'Outerwear', 'Children'],
+          'Reinforcing eyelets and grommets that finish lace and cord holes with a durable metal rim.',
+        material: 'Brass / aluminium / steel',
+        variations: ['Self-piercing', 'Washer set', 'Spur', 'Custom finish'],
+        applications: ['Footwear', 'Curtains', 'Bags', 'Corsetry'],
+        gallery: Array.from({ length: 1 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/eyelet-grommet/eyelet-grommet-${String(i + 1).padStart(2, '0')}.webp`,
+        })),
       },
     ],
   },
@@ -209,7 +213,7 @@ export const categories: Category[] = [
         material: 'Zinc alloy / POM / nylon',
         variations: ['Side-release', 'Pin buckle', 'Roller', 'Cam lock'],
         applications: ['Belts', 'Bags', 'Outerwear', 'Sportswear'],
-        gallery: Array.from({ length: 24 }, (_, i) => ({
+        gallery: Array.from({ length: 38 }, (_, i) => ({
           label: `Design ${i + 1}`,
           image: `/images/buckle/buckle-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -221,35 +225,35 @@ export const categories: Category[] = [
         material: 'POM / nylon / metal',
         variations: ['Single-hole', 'Double-hole', 'Spring', 'Custom shape'],
         applications: ['Hoodies', 'Jackets', 'Bags', 'Outdoor gear'],
-        gallery: Array.from({ length: 16 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/cord-lock-stopper/cord-lock-stopper-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
+        gallery: [
+          ...Array.from({ length: 16 }, (_, i) => ({
+            label: `Design ${i + 1}`,
+            image: `/images/cord-lock-stopper/cord-lock-stopper-${String(i + 1).padStart(2, '0')}.webp`,
+          })),
+          ...Array.from({ length: 14 }, (_, i) => ({
+            label: `Stopper ${i + 1}`,
+            image: `/images/stopper/stopper-${String(i + 1).padStart(2, '0')}.webp`,
+          })),
+        ],
       },
       {
-        name: 'Zipper Puller',
+        name: 'Puller',
         description:
-          'Pull tabs and cord pullers that give zippers an easy grip and a finished, branded look.',
-        material: 'Metal / cord / rubber',
-        variations: ['Cord puller', 'Metal tab', 'Rubber tip', 'Custom shape'],
+          'Pull tabs and cord pullers that give zippers and drawstrings an easy grip and a finished, branded look.',
+        material: 'Metal / cord / rubber / TPU',
+        variations: ['Cord puller', 'Metal tab', 'Rubber tip', 'Knotted', 'Custom shape'],
         applications: ['Jackets', 'Bags', 'Sportswear', 'Footwear'],
-        gallery: Array.from({ length: 9 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/zipper-puller/zipper-puller-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
+        gallery: [
+          ...Array.from({ length: 13 }, (_, i) => ({
+            label: `Design ${i + 1}`,
+            image: `/images/zipper-puller/zipper-puller-${String(i + 1).padStart(2, '0')}.webp`,
+          })),
+          ...Array.from({ length: 3 }, (_, i) => ({
+            label: `String ${i + 1}`,
+            image: `/images/string-puller/string-puller-${String(i + 1).padStart(2, '0')}.webp`,
+          })),
+        ],
       },
-      {
-        name: 'String Puller',
-        description:
-          'Durable string pullers designed to provide an easy grip, improved functionality, and a premium finishing touch for zippers, bags, and outdoor apparel.',
-        material: 'Polyester cord / Nylon / Rubber / TPU',
-        variations: ['Cord puller', 'Rubber puller', 'Knotted', 'Tipped', 'Custom logo'],
-        applications: ['Jackets', 'Bags', 'Sportswear', 'Outdoor gear'],
-        gallery: Array.from({ length: 3 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/string-puller/string-puller-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
-        },
       {
         name: 'D-Ring',
         description:
@@ -257,10 +261,12 @@ export const categories: Category[] = [
         material: 'Zinc alloy / steel',
         variations: ['Welded', 'Cast', 'Plated', 'Multiple widths'],
         applications: ['Bags', 'Straps', 'Overalls', 'Accessories'],
-        gallery: Array.from({ length: 5 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/d-ring/d-ring-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
+        gallery: Array.from({ length: 6 }, (_, i) => i + 1)
+          .filter((n) => n !== 2)
+          .map((n) => ({
+            label: `Design ${n}`,
+            image: `/images/d-ring/d-ring-${String(n).padStart(2, '0')}.webp`,
+          })),
       },
       {
         name: 'O-Ring',
@@ -269,7 +275,7 @@ export const categories: Category[] = [
         material: 'Zinc alloy / steel',
         variations: ['Welded', 'Seamless', 'Plated', 'Multiple gauges'],
         applications: ['Bags', 'Straps', 'Fashion', 'Accessories'],
-        gallery: Array.from({ length: 14 }, (_, i) => ({
+        gallery: Array.from({ length: 17 }, (_, i) => ({
           label: `Design ${i + 1}`,
           image: `/images/o-ring/o-ring-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -287,38 +293,6 @@ export const categories: Category[] = [
         })),
       },
       {
-        name: 'Eyelet / Grommet',
-        description:
-          'Reinforcing eyelets and grommets that finish lace and cord holes with a durable metal rim.',
-        material: 'Brass / aluminium / steel',
-        variations: ['Self-piercing', 'Washer set', 'Spur', 'Custom finish'],
-        applications: ['Footwear', 'Curtains', 'Bags', 'Corsetry'],
-        gallery: Array.from({ length: 1 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/eyelet-grommet/eyelet-grommet-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
-      },
-      {
-        name: 'Washer',
-        description:
-          'Paired backing washers that lock eyelets and grommets securely for long-lasting performance.',
-        material: 'Brass / steel',
-        variations: ['Plain', 'Spur', 'Toothed', 'Plated'],
-        applications: ['Eyelet sets', 'Belts', 'Bags', 'Tarpaulin'],
-      },
-      {
-        name: 'Metal Ring',
-        description:
-          'Decorative and functional metal rings for strap hardware, handles, and fashion detailing.',
-        material: 'Zinc alloy / iron',
-        variations: ['Round', 'Square', 'Oval', 'Welded'],
-        applications: ['Bags', 'Belts', 'Fashion', 'Accessories'],
-        gallery: Array.from({ length: 1 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/metal-ring/metal-ring-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
-      },
-      {
         name: 'Belt',
         description:
           'High-quality garment belts designed to provide secure fastening, durability, and a stylish finishing touch for various apparel applications.',
@@ -333,10 +307,20 @@ export const categories: Category[] = [
         material: 'Iron / zinc alloy / brass',
         variations: ['Curb', 'Ball', 'Flat link', 'Plated'],
         applications: ['Bags', 'Fashion', 'Footwear', 'Accessories'],
-        gallery: Array.from({ length: 7 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/chain/chain-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
+        gallery: Array.from({ length: 7 }, (_, i) => i + 1)
+          .filter((n) => n !== 1 && n !== 2)
+          .map((n) => ({
+            label: `Design ${n}`,
+            image: `/images/chain/chain-${String(n).padStart(2, '0')}.webp`,
+          })),
+      },
+      {
+        name: 'Bra Hook',
+        description:
+          'Hook-and-eye closures engineered for secure, comfortable fastening and smooth adjustment on bras.',
+        material: 'Nylon-coated metal',
+        variations: ['1-row', '2-row', '3-row', 'Multiple widths'],
+        applications: ['Bras', 'Bustiers', 'Shapewear', 'Lingerie'],
       },
     ],
   },
@@ -393,18 +377,6 @@ export const categories: Category[] = [
         material: 'Nylon / polyester',
         variations: ['Sew-on', 'Adhesive', 'Soft-touch', 'Custom width'],
         applications: ['Sportswear', 'Childrenswear', 'Bags', 'Workwear'],
-      },
-      {
-        name: 'Drawstring',
-        description:
-          'Premium drawstrings designed to provide secure adjustment, durability, and a stylish finishing detail for garments, bags, and footwear.',
-        material: 'Polyester / Cotton / Nylon',
-        variations: ['Flat', 'Round', 'Braided', 'Printed', 'Tipped'],
-        applications: ['Hoodies', 'Joggers', 'Shorts', 'Bags'],
-        gallery: Array.from({ length: 1 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/drawstring/drawstring-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
       },
       {
         name: 'Tape',
@@ -511,36 +483,12 @@ export const categories: Category[] = [
         description:
           'Classic woven and raschel lace offering delicate, ornate patterns for an elegant, feminine finish.',
         material: 'Nylon / polyester / cotton',
-        variations: ['Raschel', 'Chantilly', 'Eyelet', 'Custom width'],
+        variations: ['Raschel', 'Chantilly', 'Eyelet', 'Stretch', 'Embroidered', 'Crochet', 'Custom width'],
         applications: ['Lingerie', 'Dresses', 'Blouses', 'Bridal'],
-        gallery: Array.from({ length: 1 }, (_, i) => ({
+        gallery: Array.from({ length: 11 }, (_, i) => ({
           label: `Design ${i + 1}`,
           image: `/images/lace/lace-${String(i + 1).padStart(2, '0')}.webp`,
         })),
-      },
-      {
-        name: 'Stretch Lace',
-        description:
-          'Elasticated lace combining decorative patterning with comfortable stretch for body-contouring pieces.',
-        material: 'Nylon / spandex',
-        variations: ['Galloon', 'Edging', 'Allover', 'Custom color'],
-        applications: ['Lingerie', 'Shapewear', 'Activewear', 'Swimwear'],
-      },
-      {
-        name: 'Embroidered Lace',
-        description:
-          'Richly embroidered lace with raised motifs for a luxurious, couture-level decorative effect.',
-        material: 'Polyester / cotton ground',
-        variations: ['Corded', 'Beaded', 'Metallic thread', 'Custom motif'],
-        applications: ['Bridal', 'Eveningwear', 'Lingerie', 'Couture'],
-      },
-      {
-        name: 'Crochet Lace',
-        description:
-          'Hand-look crochet lace adding artisanal, bohemian texture to garments and home textiles.',
-        material: 'Cotton / acrylic',
-        variations: ['Cluny', 'Filet', 'Scalloped', 'Custom width'],
-        applications: ['Dresses', 'Trims', 'Home textiles', 'Crafts'],
       },
       {
         name: 'Pom-Pom Trim',
@@ -587,13 +535,13 @@ export const categories: Category[] = [
     icon: 'Tags',
     variants: [
       {
-        name: 'Woven Label',
+        name: 'Label',
         description:
           'Densely woven labels delivering sharp logo definition and a premium hand-feel that lasts wash after wash.',
         material: 'Polyester / damask / satin weave',
         variations: ['Damask', 'Satin', 'Taffeta', 'Folded', 'Straight cut'],
         applications: ['Neck labels', 'Brand tags', 'Care patches'],
-        gallery: Array.from({ length: 9 }, (_, i) => ({
+        gallery: Array.from({ length: 12 }, (_, i) => ({
           label: `Design ${i + 1}`,
           image: `/images/woven-label/woven-label-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -605,7 +553,7 @@ export const categories: Category[] = [
         material: 'Heat-applied film',
         variations: ['Tagless', 'Full color', 'Metallic', 'Reflective'],
         applications: ['Sportswear', 'Activewear', 'Underwear', 'Tagless tees'],
-        gallery: Array.from({ length: 2 }, (_, i) => ({
+        gallery: Array.from({ length: 3 }, (_, i) => ({
           label: `Design ${i + 1}`,
           image: `/images/heat-transfer-label/heat-transfer-label-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -629,7 +577,7 @@ export const categories: Category[] = [
         material: 'Satin / damask',
         variations: ['Printed', 'Woven', 'Folded', 'Custom size run'],
         applications: ['Size tags', 'Neck labels', 'Inner labels'],
-        gallery: Array.from({ length: 2 }, (_, i) => ({
+        gallery: Array.from({ length: 3 }, (_, i) => ({
           label: `Design ${i + 1}`,
           image: `/images/size-label/size-label-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -641,7 +589,7 @@ export const categories: Category[] = [
         material: 'Art card / kraft / recycled board',
         variations: ['Matte', 'Gloss', 'Foil', 'Embossed', 'Eco kraft'],
         applications: ['Retail', 'Branding', 'Point of sale'],
-        gallery: Array.from({ length: 8 }, (_, i) => ({
+        gallery: Array.from({ length: 12 }, (_, i) => ({
           label: `Design ${i + 1}`,
           image: `/images/hang-tag/hang-tag-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -653,10 +601,12 @@ export const categories: Category[] = [
         material: 'Genuine / PU leather',
         variations: ['Debossed', 'Embossed', 'Laser-etched', 'Stitched'],
         applications: ['Denim', 'Bags', 'Caps', 'Outerwear'],
-        gallery: Array.from({ length: 20 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/leather-patch/leather-patch-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
+        gallery: Array.from({ length: 23 }, (_, i) => i + 1)
+          .filter((n) => n !== 18)
+          .map((n) => ({
+            label: `Design ${n}`,
+            image: `/images/leather-patch/leather-patch-${String(n).padStart(2, '0')}.webp`,
+          })),
       },
       {
         name: 'Rubber & Silicone Patch',
@@ -665,10 +615,16 @@ export const categories: Category[] = [
         material: 'PVC / rubber',
         variations: ['2D', '3D', 'Soft-touch', 'Glow / reflective'],
         applications: ['Outerwear', 'Bags', 'Caps', 'Footwear'],
-        gallery: Array.from({ length: 15 }, (_, i) => ({
-          label: `Design ${i + 1}`,
-          image: `/images/rubber-patch/rubber-patch-${String(i + 1).padStart(2, '0')}.webp`,
-        })),
+        gallery: [
+          ...Array.from({ length: 16 }, (_, i) => ({
+            label: `Design ${i + 1}`,
+            image: `/images/rubber-patch/rubber-patch-${String(i + 1).padStart(2, '0')}.webp`,
+          })),
+          ...Array.from({ length: 1 }, (_, i) => ({
+            label: `Silicone ${i + 1}`,
+            image: `/images/sillicone-patch/sillicone-patch-${String(i + 1).padStart(2, '0')}.webp`,
+          })),
+        ],
       },
       {
         name: 'Embroidery Patch',
@@ -677,7 +633,7 @@ export const categories: Category[] = [
         material: 'Polyester / cotton thread',
         variations: ['Iron-on', 'Sew-on', 'Velcro-back', 'Merrowed edge'],
         applications: ['Caps', 'Jackets', 'Uniforms', 'Fashion'],
-        gallery: Array.from({ length: 44 }, (_, i) => ({
+        gallery: Array.from({ length: 46 }, (_, i) => ({
           label: `Design ${i + 1}`,
           image: `/images/embroidery-patch/embroidery-patch-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -689,7 +645,7 @@ export const categories: Category[] = [
         material: 'Zinc alloy / brass / stainless',
         variations: ['Engraved', 'Embossed', 'Enamel-fill', 'Plated'],
         applications: ['Bags', 'Footwear', 'Outerwear', 'Accessories'],
-        gallery: Array.from({ length: 29 }, (_, i) => ({
+        gallery: Array.from({ length: 38 }, (_, i) => ({
           label: `Plate ${i + 1}`,
           image: `/images/metal-plate/metal-plate-${String(i + 1).padStart(2, '0')}.webp`,
         })),
@@ -702,9 +658,9 @@ export const categories: Category[] = [
   // -------------------------------------------------------------------------
   {
     slug: 'drawcords',
-    name: 'Drawcords & Stoppers',
+    name: 'Drawcord & Drawstrings',
     tagline: 'Cords & Ropes',
-    heroTitle: 'Drawcords, Rope, & Stoppers Collection',
+    heroTitle: 'Drawcord & Drawstring Collection',
     heroSubtitle:
       'Soft, durable cords and ropes with custom tips and finishes for hoods, waistbands, and bags — comfortable, functional, and brand-ready.',
     blurb: 'Drawcords, cotton, elastic & bungee cords along with rope and cord stoppers.',
@@ -717,6 +673,10 @@ export const categories: Category[] = [
         material: 'Polyester / cotton blend',
         variations: ['Flat', 'Round', 'Tipped', 'Printed', 'Custom color'],
         applications: ['Hoodies', 'Joggers', 'Bags', 'Jackets'],
+        gallery: Array.from({ length: 16 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/drawcord/drawcord-${String(i + 1).padStart(2, '0')}.webp`,
+        })),
       },
       {
         name: 'Bungee Cord',
@@ -735,12 +695,16 @@ export const categories: Category[] = [
         applications: ['Bag handles', 'Footwear', 'Outdoor', 'Fashion'],
       },
       {
-        name: 'Stopper / Cord Lock',
+        name: 'Drawstring',
         description:
-          'Durable cord locks and stoppers designed to securely hold drawcords and elastic cords in place while allowing quick and easy adjustment.',
-        material: 'POM / Nylon / ABS',
-        variations: ['Single-hole', 'Double-hole', 'Spring-loaded', 'Toggle', 'Custom shape'],
-        applications: ['Jackets', 'Hoodies', 'Bags', 'Outdoor gear'],
+          'Premium drawstrings designed to provide secure adjustment, durability, and a stylish finishing detail for garments, bags, and footwear.',
+        material: 'Polyester / Cotton / Nylon',
+        variations: ['Flat', 'Round', 'Braided', 'Printed', 'Tipped'],
+        applications: ['Hoodies', 'Joggers', 'Shorts', 'Bags'],
+        gallery: Array.from({ length: 1 }, (_, i) => ({
+          label: `Design ${i + 1}`,
+          image: `/images/drawstring/drawstring-${String(i + 1).padStart(2, '0')}.webp`,
+        })),
       },
     ],
   },
@@ -758,14 +722,6 @@ export const categories: Category[] = [
     blurb: 'Bra hooks, rings, sliders, underwires, cups & adjusters.',
     icon: 'Heart',
     variants: [
-      {
-        name: 'Bra Hook',
-        description:
-          'Hook-and-eye closures engineered for secure, comfortable fastening and smooth adjustment on bras.',
-        material: 'Nylon-coated metal',
-        variations: ['1-row', '2-row', '3-row', 'Multiple widths'],
-        applications: ['Bras', 'Bustiers', 'Shapewear', 'Lingerie'],
-      },
       {
         name: 'Bra Ring',
         description:
@@ -789,14 +745,6 @@ export const categories: Category[] = [
         material: 'Coated spring steel',
         variations: ['Standard', 'Push-up', 'Plunge', 'Multiple sizes'],
         applications: ['Bras', 'Bustiers', 'Swimwear', 'Corsetry'],
-      },
-      {
-        name: 'Bra Cup',
-        description:
-          'Molded foam cups providing shape, padding, and support in a range of profiles and finishes.',
-        material: 'Molded foam / spacer fabric',
-        variations: ['Push-up', 'T-shirt', 'Removable', 'Multiple sizes'],
-        applications: ['Bras', 'Swimwear', 'Activewear', 'Dresses'],
       },
       {
         name: 'Strap Adjuster',
@@ -926,6 +874,14 @@ export const categories: Category[] = [
         variations: ['Plain pocketing', 'Twill pocketing', 'Printed pocketing', 'Lightweight pocketing'],
         applications: ['Jeans', 'Trousers', 'Jackets', 'Uniforms'],
       },
+      {
+        name: 'Bra Cup',
+        description:
+          'Molded foam cups providing shape, padding, and support in a range of profiles and finishes.',
+        material: 'Molded foam / spacer fabric',
+        variations: ['Push-up', 'T-shirt', 'Removable', 'Multiple sizes'],
+        applications: ['Bras', 'Swimwear', 'Activewear', 'Dresses'],
+      },
     ],
   },
 
@@ -1039,7 +995,7 @@ export const categories: Category[] = [
         })),
       },
       {
-        name: 'Carton Box',
+        name: 'Box',
         description:
           'Sturdy corrugated cartons engineered for safe storage and export shipping of finished garments.',
         material: 'Corrugated board',
@@ -1056,6 +1012,21 @@ export const categories: Category[] = [
 
 export const getCategory = (slug: string): Category | undefined =>
   categories.find((c) => c.slug === slug)
+
+/**
+ * Cover image for a product's card / carousel: use an explicit `image` when set
+ * (e.g. a dedicated AI cover), otherwise fall back to the first gallery photo so
+ * products with real photography show a real cover instead of a placeholder.
+ */
+export const getProductCover = (p: ProductVariant): string | undefined =>
+  p.image ?? p.gallery?.[0]?.image
+
+/**
+ * Cover image for a category's homepage card and page hero: use an explicit
+ * category `image` when set, otherwise the first available product cover.
+ */
+export const getCategoryCover = (c: Category): string | undefined =>
+  c.image ?? c.variants.map(getProductCover).find(Boolean)
 
 export const COMPANY = {
   name: 'PT BTX Garment Trims Indonesia',

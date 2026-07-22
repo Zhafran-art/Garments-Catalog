@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Layers, Tag, Boxes, Maximize2 } from 'lucide-react'
-import type { ProductVariant } from '../data/products'
+import { getProductCover, type ProductVariant } from '../data/products'
 import { importGalleryModal, prefetch } from '../lib/prefetch'
 import PlaceholderImage from './PlaceholderImage'
 import LazyProductGalleryModal from './LazyProductGalleryModal'
@@ -97,7 +97,7 @@ export default function ProductCarousel({
               >
                 <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105">
                   <PlaceholderImage
-                    src={active.image}
+                    src={getProductCover(active)}
                     alt={active.name}
                     icon={Icon}
                     label={active.name}
@@ -206,7 +206,7 @@ export default function ProductCarousel({
             }`}
           >
             <span className="h-12 w-12 overflow-hidden rounded-lg">
-              <PlaceholderImage src={item.image} alt={item.name} icon={Icon} />
+              <PlaceholderImage src={getProductCover(item)} alt={item.name} icon={Icon} />
             </span>
             <span
               className={`text-sm font-semibold ${
